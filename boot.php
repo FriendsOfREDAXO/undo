@@ -1,4 +1,12 @@
 <?php
+/**
+ * media_manager_autorewrite Addon.
+ *
+ * @author Friends Of REDAXO
+ *
+ * @var rex_addon
+ */
+
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('undo[]');
 
