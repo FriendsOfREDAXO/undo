@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS `%TABLE_PREFIX%article_undo`;
+DROP TABLE IF EXISTS `%TABLE_PREFIX%article_slice_undo`;
