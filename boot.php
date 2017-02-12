@@ -66,7 +66,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
                 case 'cat':
                 $outputMsg = rex_i18n::msg('undo_category_restored');
                 foreach (rex_clang::getAllIds() as $clang) {
-                    rex_category_service::newCatPrio($parent_id, 0, 0, $catpriority);
+                    rex_category_service::newCatPrio($parent_id, $clang, 0, $catpriority);
                 }
 
                 break;
