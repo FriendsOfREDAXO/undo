@@ -1,8 +1,0 @@
-undo_undo_action = Undo
-undo_article_restored = Le produit a été récupéré!
-undo_category_restored = Catégorie a été restauré!
-
-
-# Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
-
-perm_general_undo[] = Droits de Undo-Ajouter
