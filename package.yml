@@ -4,6 +4,6 @@ author: Friends Of REDAXO
 supportpage: github.com/FriendsOfREDAXO/undo
 
 requires:
-    redaxo: '^5.3.0' # benötigt mindestens REDAXO 5.0
+    redaxo: '^5.3.0-beta1' # benötigt mindestens REDAXO 5.0
     php:
         version: '>=5.6' # benötigt mindestens PHP 5.6
