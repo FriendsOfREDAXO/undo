@@ -5,7 +5,7 @@ Mit diesem AddOn kann ein gelöschter Artikel oder eine gelöschte Kategorie wie
 
 ToDo
 -----
-Ich würde gerne noch die Möglichkeit für Templates und Module anbieten, hierzu gibt es aber aktuell noch keine EPs. Sobald das REX-Core Team diese zur Verfügung gestellt hat, wird diese Funktion nachgereicht.
+Ich würde gerne noch die Möglichkeit für Templates und Module anbieten, hierzu gibt es aber aktuell noch keine EPs. Sobald das REX-Core Team diese zur Verfügung gestellt hat, wird diese Funktionalität nachgereicht.
 
 Weitere Hinweise
 -----
