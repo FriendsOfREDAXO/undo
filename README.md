@@ -29,6 +29,7 @@ Voraussetzungen
 ------------
 
 * REDAXO >= 5.3.0
+* structure AddOn
 
 ToDo
 -----
