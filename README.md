@@ -6,8 +6,7 @@ Mit diesem AddOn kann ein gelöschter Artikel oder eine gelöschte Kategorie wie
 Changelog
 ------------
 Version 2.0.2
-* Auto-Repair Funktion, wenn der Core oder ein AddOn die rex_article oder rex_article_slice verändert
-Das AddOn muss nicht mehr neu installiert werden.
+* Auto-Repair Funktion, wenn der Core oder ein AddOn die rex_article oder rex_article_slice verändert _(Das AddOn muss nicht mehr neu installiert werden.)_
 
 Version 2.0.1
 * Support für mehrsprachige Seiten
