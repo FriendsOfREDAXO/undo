@@ -1,11 +1,11 @@
 package: undo
-version: '2.0.2'
-author: Friends Of REDAXO
+version: '2.0.3'
+author: FriendsOfREDAXO
 supportpage: github.com/FriendsOfREDAXO/undo
 
 requires:
     packages:
-        structure: '^2.3.0'
-    redaxo: '^5.3.0'
+        structure: '^2.2.0'
+    redaxo: '^5.1.0'
     php:
         version: '>=5.6'
