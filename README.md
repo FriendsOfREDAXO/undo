@@ -5,7 +5,11 @@ Mit diesem AddOn kann ein gelöschter Artikel oder eine gelöschte Kategorie wie
 
 Changelog
 ------------
-Version 2.0.0
+Version 2.0.2
+* Auto-Repair Funktion, wenn der Core oder ein AddOn die rex_article oder rex_article_slice verändert
+Das AddOn muss nicht mehr neu installiert werden.
+
+Version 2.0.1
 * Support für mehrsprachige Seiten
 * Performanceoptimierungen
 * Priorität wurde behoben
@@ -29,7 +33,6 @@ Voraussetzungen
 ------------
 
 * REDAXO >= 5.3.0
-* structure AddOn
 
 ToDo
 -----
@@ -42,5 +45,3 @@ Ich würde gerne noch die Möglichkeit für Templates und Module anbieten, hierz
 Weitere Hinweise
 -----
 * Die Arbeitsversion / Revision wird aktuell noch nicht wiederhergestellt.
-
-Da REDAXO aktuell noch keinen EP bei einem Core-Update zur Verfügung stellt, sollte dieses AddOn nach jedem Core-Update deinstalliert und wieder installiert werden (reinstallieren funktioniert nicht). Dadurch werden Änderungen an der Tabelle rex_article und rex_article_slice automatisch übernommen.

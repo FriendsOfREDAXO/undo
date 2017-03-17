@@ -24,10 +24,26 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     // Listen on EP to save a tmp state
     rex_extension::register('ART_PRE_DELETED', function (rex_extension_point $ep) {
         $content = $ep->getParams();
-
         $ART = rex_sql::factory();
-        $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_undo SELECT * FROM '.rex::getTablePrefix().'article where id=?', [$content['id']]);
-        $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_slice_undo SELECT * FROM '.rex::getTablePrefix().'article_slice where article_id=?', [$content['id']]);
+
+        try {
+            $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_undo SELECT * FROM '.rex::getTablePrefix().'article where id=?', [$content['id']]);
+            $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_slice_undo SELECT * FROM '.rex::getTablePrefix().'article_slice where article_id=?', [$content['id']]);
+        } catch (Exception $e) {
+            /* Table was changed, we need to reinstall it */
+            $ART->setQuery('DROP TABLE IF EXISTS ' . rex::getTable('article_undo'));
+            $ART->setQuery('DROP TABLE IF EXISTS ' . rex::getTable('article_slice_undo'));
+
+            $ART->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('article_undo') . ' LIKE ' . rex::getTable('article'));
+            $ART->setQuery('CREATE TABLE IF NOT EXISTS ' . rex::getTable('article_slice_undo') . ' LIKE ' . rex::getTable('article_slice'));
+
+            // Retry last insert undo action
+            $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_undo SELECT * FROM '.rex::getTablePrefix().'article where id=?', [$content['id']]);
+            $ART->setQuery('INSERT INTO '.rex::getTablePrefix().'article_slice_undo SELECT * FROM '.rex::getTablePrefix().'article_slice where article_id=?', [$content['id']]);
+
+        }
+
+
     });
 
     // output message with undo-link for articles
