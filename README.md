@@ -21,7 +21,7 @@ Version 2.0.1
 
 Settingspage
 ------------
-Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel oder eine Kategorie gelöscht wurden.
+Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel, Slice oder eine Kategorie gelöscht wurden.
 
 Installation
 ------------
