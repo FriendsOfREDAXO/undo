@@ -1,6 +1,7 @@
 undo_undo_action = Rückgängig machen
 undo_article_restored = Artikel wurde wiederhergestellt!
 undo_category_restored = Kategorie wurde wiederhergestellt!
+undo_slice_restored = Block wurde wiederhergestellt!
 
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
