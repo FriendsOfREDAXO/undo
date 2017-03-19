@@ -1,8 +1,0 @@
-undo_undo_action = Undo
-undo_article_restored = Article has been restored!
-undo_category_restored = Category has been restored!
-
-
-# Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
-
-perm_general_undo[] = Rights for Undo-Addon
