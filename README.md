@@ -36,7 +36,7 @@ Oder den REDAXO-Installer / ZIP-Upload AddOn nutzen!
 Voraussetzungen
 ------------
 
-* REDAXO >= 5.3.0
+* REDAXO >= 5.1.0
 * structure AddOn
 
 ToDo
