@@ -1,0 +1,9 @@
+undo_undo_action = Desfazer
+undo_article_restored = O  artigo foi restaurado!
+undo_category_restored = A categoria foi restaurada!
+undo_slice_restored = O block foi restaurado!
+
+
+# Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
+
+perm_general_undo[] = Permissões para desfayer AddOn
