@@ -1,0 +1,9 @@
+undo_undo_action = ångra
+undo_article_restored = Artikeln har återställts!
+undo_category_restored = Kategorien har återställts!
+undo_slice_restored = Avsnittet har återställts!
+
+
+# Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
+
+perm_general_undo[] = Rättigheter för Undo-AddOn
