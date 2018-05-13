@@ -1,0 +1,9 @@
+undo_undo_action = Deshacer
+undo_article_restored = El artículo ha sido restaurado!
+undo_category_restored = La categoría ha sido restaurada!
+undo_slice_restored = El bloque fue restaurado!
+
+
+# Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
+
+perm_general_undo[] = Permisos para deshacer el complemento
