@@ -21,7 +21,7 @@ Version 2.0.1
 
 Settingspage
 ------------
-Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel, Slice oder eine Kategorie gelöscht wurden.
+Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel oder eine Kategorie gelöscht wurden.
 
 Installation
 ------------
@@ -36,7 +36,7 @@ Oder den REDAXO-Installer / ZIP-Upload AddOn nutzen!
 Voraussetzungen
 ------------
 
-* REDAXO >= 5.1.0
+* REDAXO >= 5.3.0
 * structure AddOn
 
 ToDo

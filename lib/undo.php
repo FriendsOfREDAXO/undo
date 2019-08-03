@@ -32,6 +32,8 @@ class undo
 
     public static function fixSlicePrio($article_id, $ctype, $slice_revision = 0)
     {
+        //dump($article_id);
+        //dump($ctype);
         rex_sql_util::organizePriorities(
             rex::getTable('article_slice'),
             'priority',

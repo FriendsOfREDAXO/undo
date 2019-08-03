@@ -19,6 +19,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     $type = rex_request('type', 'string', '');
     $ctype = rex_request('ctype', 'int', 1);
     $deleteQueue = true;
+    $isApiCall = rex_request('rex_api_call', 'string', false);
 
     /*
     ARTIKEL UND KATEGORIEN
@@ -55,24 +56,27 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     rex_extension::register('ART_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id) {
         $content = $ep->getParams();
         $deleteQueue = false;
+        rex_set_session('undo_timestamp', time(), 'int');
 
-        return rex_i18n::msg('article_deleted')." <a href='?page=structure&undo_mode=undo&type=art&category_id=".$category_id.'&aid='.$content['id'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
+        return rex_i18n::msg('article_deleted')." <a data-pjax='false' href='?page=structure&undo_mode=undo&type=art&category_id=".$category_id.'&aid='.$content['id'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
     });
 
     // output message with undo-link for slices
     rex_extension::register('SLICE_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id) {
         $content = $ep->getParams();
         $deleteQueue = false;
+        rex_set_session('undo_timestamp', time(), 'int');
 
-        return rex_i18n::msg('block_deleted')." <a href='?page=content/edit&undo_mode=undo&pjax=false&mode=edit&type=slice&category_id=".$category_id.'&article_id='.$content['article_id'].'&slice_restore_id='.$content['slice_id'].'&ctype='.$content['ctype'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
+        return rex_i18n::msg('block_deleted')." <a data-pjax='false' href='?page=content/edit&undo_mode=undo&pjax=false&mode=edit&type=slice&category_id=".$category_id.'&article_id='.$content['article_id'].'&slice_restore_id='.$content['slice_id'].'&ctype='.$content['ctype'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
     });
 
     // output message with undo-link for categories
     rex_extension::register('CAT_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id) {
         $content = $ep->getParams();
         $deleteQueue = false;
+        rex_set_session('undo_timestamp', time(), 'int');
 
-        return rex_i18n::msg('category_deleted')." <a href='?page=structure&undo_mode=undo&type=cat&category_id=".$category_id.'&aid='.$content['id'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
+        return rex_i18n::msg('category_deleted')." <a data-pjax='false' href='?page=structure&undo_mode=undo&type=cat&category_id=".$category_id.'&aid='.$content['id'].'&clang='.rex_clang::getCurrentId()."'>".rex_i18n::msg('undo_undo_action').'</a>.';
     });
 
     // undo magic if link was clicked
@@ -103,10 +107,16 @@ if (rex::isBackend() && is_object(rex::getUser())) {
                         $clang = $e['clang_id'];
 
                         $ART = rex_sql::factory();
-                        $ART->setQuery('INSERT INTO '.rex::getTable('article').' SELECT * FROM '.rex::getTable('article_undo').' where id=? and clang_id=?', [$aid, $clang]);
+
+                        try {
+                            $ART->setQuery('INSERT INTO '.rex::getTable('article').' SELECT * FROM '.rex::getTable('article_undo').' where id=? and clang_id=?', [$aid, $clang]);
+                        } catch (Exception $e) {}
+
                         // slices just need to get inserted once
                         if ($i ===  1) {
-                            $ART->setQuery('INSERT INTO '.rex::getTable('article_slice').' SELECT * FROM '.rex::getTable('article_slice_undo').' where article_id=?', [$aid]);
+                            try {
+                                $ART->setQuery('INSERT INTO '.rex::getTable('article_slice').' SELECT * FROM '.rex::getTable('article_slice_undo').' where article_id=?', [$aid]);
+                            } catch (Exception $e) {}
                         }
 
                         switch ($type) {
@@ -135,7 +145,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
             }
 
             if ($outputMsg) {
-                rex_extension::register('PAGE_TITLE', function (rex_extension_point $ep) use ($outputMsg) {
+                rex_extension::register('PAGE_TITLE_SHOWN', function (rex_extension_point $ep) use ($outputMsg) {
                     return rex_view::success($outputMsg);
                 });
             }
@@ -143,8 +153,9 @@ if (rex::isBackend() && is_object(rex::getUser())) {
         }, rex_extension::LATE);
     } else {
         /* Undo-Action will only last for one page reload */
-        if ($deleteQueue) {
+        if ($deleteQueue && (time() - rex_session('undo_timestamp')) >= 30 && !$isApiCall) {
             undo::deleteQueue();
+            rex_set_session('undo_timestamp', time(), 'int');
         }
     }
 }
