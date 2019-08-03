@@ -1,5 +1,5 @@
 # undo
-Mit diesem AddOn kann ein gelöschter Artikel, Slice oder eine gelöschte Kategorie wiederhergestellt werden. Das Wiederherstellen funktioniert nur einen einzigen Pageload lang. Sobald die Seite oder ein neuer Tab geladen wird, ist ein Revert nicht mehr möglich (soll nur vor versehentlichem Löschen schützen).
+Mit diesem AddOn kann ein gelöschter Artikel, Slice oder eine gelöschte Kategorie wiederhergestellt werden. Das Wiederherstellen funktioniert 30 Sekunden lang. Sobald die Seite oder ein neuer Tab geladen wird, ist ein Revert nicht mehr möglich (soll nur vor versehentlichem Löschen schützen).
 
 ![Screenshot](https://raw.githubusercontent.com/FriendsOfREDAXO/undo/assets/screenshot.png)
 
@@ -25,7 +25,7 @@ Version 2.0.1
 
 Settingspage
 ------------
-Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel oder eine Kategorie gelöscht wurden.
+Dieses AddOn hat keine Konfigurationsparameter. Die Aktionslinks erscheinen, sobald ein Artikel, Slice oder eine Kategorie gelöscht wurden.
 
 Installation
 ------------
