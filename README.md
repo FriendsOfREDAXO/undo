@@ -5,6 +5,10 @@ Mit diesem AddOn kann ein gelöschter Artikel, Slice oder eine gelöschte Katego
 
 Changelog
 ------------
+Version 2.1.2
+* Bugfixing für Redaxo 5.7+
+* Es wird jetzt nicht mehr mit jedem Pagereload gelöscht, sondern es müssen mindestens 30 Sekunden vergangen sein.
+
 Version 2.1.0
 * Unterstützung für Slices
 * Refactoring
