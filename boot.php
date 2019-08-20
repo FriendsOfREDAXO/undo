@@ -153,7 +153,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
         }, rex_extension::LATE);
     } else {
         /* Undo-Action will only last for one page reload */
-        if ($deleteQueue && (time() - rex_session('undo_timestamp')) >= 30 && !$isApiCall) {
+        if ($deleteQueue && rex_session('undo_timestamp') && (time() - rex_session('undo_timestamp')) >= 30 && !$isApiCall) {
             undo::deleteQueue();
             rex_set_session('undo_timestamp', time(), 'int');
         }
