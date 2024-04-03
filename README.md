@@ -5,6 +5,12 @@ Mit diesem AddOn kann ein gelöschter Artikel, Slice oder eine gelöschte Katego
 
 Changelog
 ------------
+
+Version 3.0.0
+* Namespace
+* Refactor für PHP 8.1
+* CS-Fixes
+
 Version 2.1.2
 * Bugfixing für Redaxo 5.7+
 * Es wird jetzt nicht mehr mit jedem Pagereload gelöscht, sondern es müssen mindestens 30 Sekunden vergangen sein.
@@ -40,17 +46,12 @@ Oder den REDAXO-Installer / ZIP-Upload AddOn nutzen!
 Voraussetzungen
 ------------
 
-* REDAXO >= 5.3.0
+* REDAXO >= 5.13.0
 * structure AddOn
 
 ToDo
 -----
 * Undo für Module
 * Undo für Templates
-* Beachtung der Arbeitsversion
 
 Ich würde gerne noch die Möglichkeit für Templates und Module anbieten, hierzu gibt es aber aktuell noch keine EPs. Sobald das REX-Core Team diese zur Verfügung gestellt hat, wird diese Funktionalität nachgereicht.
-
-Weitere Hinweise
------
-* Die Arbeitsversion / Revision wird aktuell noch nicht wiederhergestellt.
