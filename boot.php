@@ -1,23 +1,23 @@
 <?php
 
-
 namespace FriendsOfRedaxo\Undo;
 
- use rex;
- use function rex_request;
- use rex_extension;
- use rex_extension_point;
- use rex_sql;
- use rex_clang;
- use rex_i18n;
- use rex_view;
- use rex_article_service;
- use rex_category_service;
- use rex_article_cache;
- use rex_perm;
- use function rex_session;
- use Exception;
+use Exception;
+use rex;
+use rex_article_cache;
+use rex_article_service;
+use rex_category_service;
+use rex_clang;
+use rex_extension;
+use rex_extension_point;
+use rex_i18n;
+use rex_perm;
+use rex_sql;
+use rex_view;
 
+use function is_object;
+use function rex_request;
+use function rex_session;
 
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_perm::register('undo[]');
@@ -38,7 +38,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     */
 
     // Listen on EP to save a tmp state
-    rex_extension::register('ART_PRE_DELETED', function (rex_extension_point $ep): void {
+    rex_extension::register('ART_PRE_DELETED', static function (rex_extension_point $ep): void {
         $content = $ep->getParams();
 
         try {
@@ -48,10 +48,9 @@ if (rex::isBackend() && is_object(rex::getUser())) {
                 Undo::saveArticle($content['id']);
             }
         }
-
     });
 
-    rex_extension::register('SLICE_DELETE', function (rex_extension_point $ep): void {
+    rex_extension::register('SLICE_DELETE', static function (rex_extension_point $ep): void {
         $content = $ep->getParams();
 
         try {
@@ -61,11 +60,10 @@ if (rex::isBackend() && is_object(rex::getUser())) {
                 Undo::saveSlice($content['slice_id']);
             }
         }
-
     });
 
     // output message with undo-link for articles
-    rex_extension::register('ART_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
+    rex_extension::register('ART_DELETED', static function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
         $content = $ep->getParams();
         $deleteQueue = false;
         rex_set_session('undo_timestamp', time());
@@ -74,7 +72,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     });
 
     // output message with undo-link for slices
-    rex_extension::register('SLICE_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
+    rex_extension::register('SLICE_DELETED', static function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
         $content = $ep->getParams();
         $deleteQueue = false;
         rex_set_session('undo_timestamp', time());
@@ -83,7 +81,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     });
 
     // output message with undo-link for categories
-    rex_extension::register('CAT_DELETED', function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
+    rex_extension::register('CAT_DELETED', static function (rex_extension_point $ep) use (&$deleteQueue, $category_id): string {
         $content = $ep->getParams();
         $deleteQueue = false;
         rex_set_session('undo_timestamp', time());
@@ -93,10 +91,8 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 
     // undo magic if link was clicked
     if ($mode == 'undo') {
-
         // we need to register late, or we wont be able to triggr ART_UPDATED / CAT_UPDATED
-        rex_extension::register('PACKAGES_INCLUDED', function (rex_extension_point $ep) use ($aid, $category_id, $type, $slice_restore_id, $ctype, $article_id): void {
-
+        rex_extension::register('PACKAGES_INCLUDED', static function (rex_extension_point $ep) use ($aid, $category_id, $type, $slice_restore_id, $ctype, $article_id): void {
             $outputMsg = '';
 
             if ($type == 'cat' || $type == 'art') {
@@ -122,27 +118,29 @@ if (rex::isBackend() && is_object(rex::getUser())) {
 
                         try {
                             $ART->setQuery('INSERT INTO '.rex::getTable('article').' SELECT * FROM '.rex::getTable('article_undo').' where id=? and clang_id=?', [$aid, $clang]);
-                        } catch (Exception $e) {}
+                        } catch (Exception $e) {
+                        }
 
                         // slices just need to get inserted once
-                        if ($i ===  1) {
+                        if ($i === 1) {
                             try {
                                 $ART->setQuery('INSERT INTO '.rex::getTable('article_slice').' SELECT * FROM '.rex::getTable('article_slice_undo').' where article_id=?', [$aid]);
-                            } catch (Exception $e) {}
+                            } catch (Exception $e) {
+                            }
                         }
 
                         switch ($type) {
                             case 'cat':
-                            $outputMsg = rex_i18n::msg('undo_category_restored');
-                            rex_category_service::newCatPrio($parent_id, $clang, $catpriority, 0);
-                            rex_category_service::editCategory($aid, $clang, array('catpriority' => $catpriority, 'catname' => $catname));
-                            break;
+                                $outputMsg = rex_i18n::msg('undo_category_restored');
+                                rex_category_service::newCatPrio($parent_id, $clang, $catpriority, 0);
+                                rex_category_service::editCategory($aid, $clang, ['catpriority' => $catpriority, 'catname' => $catname]);
+                                break;
 
                             default:
-                            $outputMsg = rex_i18n::msg('undo_article_restored');
-                            rex_article_service::newArtPrio($category_id, $clang, $artpriority, 0);
-                            rex_article_service::editArticle($aid, $clang, array('name' => $artname, 'template_id' => $template_id, 'priority' => $artpriority, 'status' => $status));
-                            break;
+                                $outputMsg = rex_i18n::msg('undo_article_restored');
+                                rex_article_service::newArtPrio($category_id, $clang, $artpriority, 0);
+                                rex_article_service::editArticle($aid, $clang, ['name' => $artname, 'template_id' => $template_id, 'priority' => $artpriority, 'status' => $status]);
+                                break;
                         }
                         ++$i;
                     }
@@ -157,11 +155,10 @@ if (rex::isBackend() && is_object(rex::getUser())) {
             }
 
             if ($outputMsg) {
-                rex_extension::register('PAGE_TITLE_SHOWN', function (rex_extension_point $ep) use ($outputMsg) {
+                rex_extension::register('PAGE_TITLE_SHOWN', static function (rex_extension_point $ep) use ($outputMsg) {
                     return rex_view::success($outputMsg);
                 });
             }
-
         }, rex_extension::LATE);
     } else {
         /* Undo-Action will only last for one page reload */
