@@ -1,23 +1,24 @@
 <?php
 
-/**
- * undo Addon.
- *
- * @author Friends Of REDAXO
- *
- * @var rex_addon
- */
-class undo
+namespace FriendsOfRedaxo\Undo;
+
+use Exception;
+use rex;
+use rex_clang;
+use rex_sql;
+use rex_sql_util;
+
+class Undo
 {
     /* will also save categories, as it's in the same table */
-    public static function saveArticle($id)
+    public static function saveArticle(int $id): void
     {
         $art = rex_sql::factory();
         $art->setQuery('INSERT INTO '.rex::getTable('article_undo').' SELECT * FROM '.rex::getTable('article').' WHERE id=?', [$id]);
         $art->setQuery('INSERT INTO '.rex::getTable('article_slice_undo').' SELECT * FROM '.rex::getTable('article_slice').' WHERE article_id=?', [$id]);
     }
 
-    public static function deleteQueue()
+    public static function deleteQueue(): void
     {
         $art = rex_sql::factory();
         $art->setQuery('SELECT id FROM '.rex::getTable('article_undo').' LIMIT 1');
@@ -30,10 +31,10 @@ class undo
         }
     }
 
-    public static function fixSlicePrio($article_id, $ctype, $slice_revision = 0)
+    public static function fixSlicePrio(int $article_id, int $ctype, int $slice_revision = 0): void
     {
-        //dump($article_id);
-        //dump($ctype);
+        // dump($article_id);
+        // dump($ctype);
         rex_sql_util::organizePriorities(
             rex::getTable('article_slice'),
             'priority',
@@ -42,13 +43,13 @@ class undo
         );
     }
 
-    public static function saveSlice($id)
+    public static function saveSlice(int $id): void
     {
         $slice = rex_sql::factory();
         $slice->setQuery('INSERT INTO '.rex::getTable('article_slice_undo').' SELECT * FROM '.rex::getTable('article_slice').' WHERE id=? AND clang_id=?', [$id, rex_clang::getCurrentId()]);
     }
 
-    public static function fixTables()
+    public static function fixTables(): bool
     {
         try {
             $art = rex_sql::factory();
