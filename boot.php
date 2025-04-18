@@ -12,11 +12,11 @@ use rex_extension;
 use rex_extension_point;
 use rex_i18n;
 use rex_perm;
+use rex_url;
 use rex_sql;
 use rex_view;
-use function is_object;
+use function rex_addon;
 use function rex_request;
-use function rex_url;
 use function rex_session;
 use function rex_set_session;
 
