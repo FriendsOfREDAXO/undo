@@ -1,0 +1,33 @@
+/**
+ * REDAXO Undo Addon - Styling für Countdown
+ */
+
+.undo-message {
+    position: relative;
+    padding-right: 120px;  /* Platz für den Countdown */
+}
+
+.undo-link {
+    font-weight: bold;
+}
+
+#undo-countdown {
+    display: inline-block;
+    font-weight: bold;
+    color: #f9f509;  /* Rote Farbe für Dringlichkeit */
+    min-width: 24px;
+    text-align: center;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

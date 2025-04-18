@@ -2,6 +2,11 @@ undo_undo_action = Desfazer
 undo_article_restored = O  artigo foi restaurado!
 undo_category_restored = A categoria foi restaurada!
 undo_slice_restored = O block foi restaurado!
+undo_module_restored = O módulo foi restaurado!
+undo_template_restored = O modelo foi restaurado!
+undo_tables_updated = As tabelas de desfazer foram atualizadas.
+undo_countdown_text = Esta ação pode ser desfeita por
+undo_countdown_seconds = segundos
 
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
