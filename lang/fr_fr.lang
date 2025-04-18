@@ -2,6 +2,11 @@ undo_undo_action = Undo
 undo_article_restored = Le produit a été récupéré!
 undo_category_restored = Catégorie a été restauré!
 undo_slice_restored = Bloc a été restauré!
+undo_module_restored = Module a été restauré!
+undo_template_restored = Template a été restauré!
+undo_tables_updated = Les tables d'annulation ont été mises à jour.
+undo_countdown_text = Cette action peut être annulée pendant
+undo_countdown_seconds = secondes
 
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein

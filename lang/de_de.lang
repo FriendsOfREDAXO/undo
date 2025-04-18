@@ -2,6 +2,11 @@ undo_undo_action = Rückgängig machen
 undo_article_restored = Artikel wurde wiederhergestellt!
 undo_category_restored = Kategorie wurde wiederhergestellt!
 undo_slice_restored = Block wurde wiederhergestellt!
+undo_module_restored = Modul wurde wiederhergestellt!
+undo_template_restored = Template wurde wiederhergestellt!
+undo_tables_updated = Die Undo-Tabellen wurden aktualisiert.
+undo_countdown_text = Die Aktion kann
+undo_countdown_seconds = Sekunden lang rückgängig gemacht werden
 
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein

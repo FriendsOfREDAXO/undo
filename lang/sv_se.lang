@@ -2,6 +2,11 @@ undo_undo_action = ångra
 undo_article_restored = Artikeln har återställts!
 undo_category_restored = Kategorien har återställts!
 undo_slice_restored = Avsnittet har återställts!
+undo_module_restored = Modulen har återställts!
+undo_template_restored = Mallen har återställts!
+undo_tables_updated = Ångra-tabellerna har uppdaterats.
+undo_countdown_text = Denna åtgärd kan ångras i
+undo_countdown_seconds = sekunder
 
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein

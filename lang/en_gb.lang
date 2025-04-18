@@ -2,6 +2,11 @@ undo_undo_action = Undo
 undo_article_restored = Article has been restored!
 undo_category_restored = Category has been restored!
 undo_slice_restored = Block has been restored!
+undo_module_restored = Module has been restored!
+undo_template_restored = Template has been restored!
+undo_tables_updated = The undo tables have been updated.
+undo_countdown_text = This action can be undone for
+undo_countdown_seconds = seconds
 
 # Benennung für die Addonrechte, sichtbar innerhalb der REDAXO-Administration unter Benutzer > Rollen > Allgemein
 
